@@ -1,25 +1,25 @@
 {
-  "name": "next_scheduler",
-  "version": "0.1.0",
+  "name": "next-scheduler",
+  "version": "1.0.0",
   "private": true,
+  "description": "Next.js Scheduler App with NestJS Backend",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.5"
+    "dev": "concurrently \"yarn workspace @scheduler/frontend dev\" \"yarn workspace @scheduler/backend start:dev\"",
+    "build": "yarn workspaces foreach run build",
+    "build:frontend": "yarn workspace @scheduler/frontend build",
+    "build:backend": "yarn workspace @scheduler/backend build",
+    "start": "concurrently \"yarn workspace @scheduler/frontend start\" \"yarn workspace @scheduler/backend start:prod\"",
+    "lint": "yarn workspaces foreach run lint",
+    "test": "yarn workspaces foreach run test",
+    "clean": "yarn workspaces foreach run clean && rm -rf node_modules",
+    "install:all": "yarn install"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.5",
-    "@eslint/eslintrc": "^3"
+    "concurrently": "^8.2.2",
+    "typescript": "^5.0.0"
   }
-}
+} 
